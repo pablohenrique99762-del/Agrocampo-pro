@@ -121,7 +121,29 @@ input,select,textarea{width:100%;font:inherit;color:var(--site-on-background);ba
     } finally { $('refresh').disabled=false; }
   }
 
-  document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(el=>el.classList.add('hidden'));document.getElementById(btn.dataset.tab).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===btn));}));
+  // Navegação robusta entre módulos: o botão Caderno de campo abre #moxia.
+  function openTab(tabId, clickedButton=null) {
+    const target = document.getElementById(tabId);
+    if (!target || !target.classList.contains('tab')) {
+      console.error('Módulo não encontrado:', tabId);
+      return;
+    }
+    document.querySelectorAll('.tab').forEach(section => section.classList.add('hidden'));
+    target.classList.remove('hidden');
+    document.querySelectorAll('[data-tab]').forEach(button => {
+      button.classList.toggle('active', button === clickedButton);
+    });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('[data-tab]').forEach(button => {
+    button.addEventListener('click', () => openTab(button.dataset.tab, button));
+  });
+  // Garante que o caderno tenha o identificador esperado pelo botão.
+  if (!document.querySelector('[data-tab="moxia"]') || !document.getElementById('moxia')) {
+    console.error('Confira o botão e a seção Caderno de campo: ambos devem usar moxia.');
+  }
+  // Registros do caderno permanecem disponíveis durante a sessão atual.
+
   const n=id=>Number.parseFloat($(id).value), f=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('pt-BR',{maximumFractionDigits:d}):'—';
   let nextMixProduct = 4;
   function addMixProduct(data={}){
