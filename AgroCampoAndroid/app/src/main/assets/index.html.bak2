@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>AgroCampo Pro</title>
+<style>
+:root{--site-primary:#174b35;--site-secondary:#dcefe2;--site-background:#f3f7f3;--site-on-primary:#fff;--site-on-secondary:#173d2b;--site-on-background:#16251b;--site-font-body:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--site-font-heading:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1}
+@media(prefers-color-scheme:dark){:root{--site-background:#101713;--site-on-background:#edf6ef;--site-secondary:#24392d;--site-on-secondary:#edf6ef}}
+*{box-sizing:border-box}body{margin:0;background:var(--site-background);color:var(--site-on-background);font-family:var(--site-font-body)}#app{min-height:100vh;background:var(--site-background);padding:clamp(16px,4vw,32px)}.wrap{max-width:850px;margin:auto}.hero{background:var(--site-primary);color:var(--site-on-primary);border-radius:calc(22px * var(--site-radius-scale));padding:calc(24px * var(--site-spacing-scale));display:flex;gap:16px;align-items:center}.logo{width:54px;height:54px;display:grid;place-items:center;border-radius:16px;background:#2d6448;font-size:27px;flex-shrink:0}.hero h1{font-family:var(--site-font-heading);font-size:calc(1.7rem * var(--site-heading-scale));margin:0 0 5px}.hero p{margin:0;opacity:.88;line-height:1.5}.tag{margin-left:auto;align-self:flex-start;border:1px solid #9ec9a9;border-radius:999px;padding:5px 10px;font-size:12px;white-space:nowrap}.panel{margin-top:18px;background:light-dark(#fff,#19231d);border:1px solid light-dark(#dce5dd,#33463a);border-radius:calc(18px * var(--site-radius-scale));padding:calc(20px * var(--site-spacing-scale))}.panel h2{font-size:calc(1.15rem * var(--site-heading-scale));margin:0 0 8px}.muted{color:light-dark(#5d6c61,#b0c4b5);font-size:.92rem;line-height:1.55}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}button{font:inherit;font-weight:650;border:0;border-radius:12px;padding:12px 16px;cursor:pointer;background:var(--site-primary);color:#fff;min-height:46px}button.secondary{background:var(--site-secondary);color:var(--site-on-secondary);border:1px solid light-dark(#c3d9c8,#496651)}button:disabled{opacity:.6;cursor:wait}.status{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--site-secondary);color:var(--site-on-secondary);line-height:1.5;overflow-wrap:anywhere}.status.error{background:light-dark(#fff0ed,#422622);color:light-dark(#872c1b,#ffd9d1)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.metric{padding:15px;border-radius:14px;background:light-dark(#f2f6f2,#222f26);border:1px solid light-dark(#e2eae3,#34473a);min-width:0}.metric .label{font-size:.82rem;color:light-dark(#5d6c61,#b0c4b5)}.metric .value{font-size:1.45rem;font-weight:750;margin-top:5px;overflow-wrap:anywhere}.metric .detail{font-size:.8rem;color:light-dark(#5d6c61,#b0c4b5);margin-top:3px}.coords{font-variant-numeric:tabular-nums}.small{font-size:.82rem}.alert{padding:12px;border-left:4px solid #d39b36;background:light-dark(#fff7e4,#362d1b);border-radius:8px;margin-top:10px;line-height:1.5}.alert.danger{border-color:#d14f40;background:light-dark(#fff0ed,#422622)}.good{border-color:#2d9460;background:light-dark(#edf9f0,#1c3526)}.foot{margin:16px 3px;font-size:.8rem;line-height:1.6;color:light-dark(#5d6c61,#b0c4b5)}a{color:inherit} @media(max-width:540px){.grid{grid-template-columns:1fr 1fr}.hero{align-items:flex-start}.tag{display:none}.panel{padding:16px}}@media(max-width:360px){.grid{grid-template-columns:1fr}}
+
+.product-entry{padding:12px;border:1px solid light-dark(#dce5dd,#33463a);border-radius:12px;margin:12px 0}.product-entry h3{margin:2px 0 8px;font-size:1rem}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.nav button{flex:1;min-width:108px}
+button.active{outline:3px solid #80bd91;outline-offset:1px}
+.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-size:.9rem;font-weight:650}
+input,select,textarea{width:100%;font:inherit;color:var(--site-on-background);background:light-dark(#fff,#101713);border:1px solid light-dark(#b9c9bc,#526657);border-radius:10px;padding:11px;min-height:44px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-card{padding:14px;border-radius:14px;background:light-dark(#f2f6f2,#222f26);border:1px solid light-dark(#e2eae3,#34473a)}.module-card strong{display:block;margin-bottom:5px}.hidden{display:none!important}.small{font-size:.82rem;line-height:1.5;color:light-dark(#5d6c61,#b0c4b5)}
+@media(max-width:360px){.row,.module-cards{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div id="app"><main class="wrap">
+<header class="hero"><div class="logo" aria-hidden="true">🌱</div><div><h1>AgroCampo Pro</h1><p>Ferramentas práticas para o campo e aplicação com drone</p></div><span class="tag">Versão inicial</span></header>
+<nav class="nav" aria-label="Módulos">
+<button class="secondary active" data-tab="inicio">🏡 Início</button><button class="secondary" data-tab="moxia">📒 Caderno de campo</button><button class="secondary" data-tab="vazao">💧 Vazão</button><button class="secondary" data-tab="calda">🛢️ Calda</button><button class="secondary" data-tab="clima">🌦️ Clima</button><button class="secondary" data-tab="drone">🚁 AgroDrone AI</button><button class="secondary" data-tab="mix">🧪 Agromix</button></nav>
+<section class="panel tab" id="inicio"><h2>Painel agrícola</h2><p class="muted">Escolha um módulo para calcular ou registrar informações da lavoura. Os resultados ajudam na conferência e não substituem a bula, a calibração do equipamento ou a orientação técnica.</p><div class="module-cards"><div class="module-card"><strong>🧪 Agromix</strong><span class="small">Dose por hectare e produto por tanque.</span></div><div class="module-card"><strong>💧 Vazão</strong><span class="small">Vazão estimada conforme taxa, faixa e velocidade.</span></div><div class="module-card"><strong>🛢️ Calda</strong><span class="small">Volume de calda e tanques necessários.</span></div><div class="module-card"><strong>🌦️ Clima</strong><span class="small">GPS e previsão meteorológica.</span></div><div class="module-card"><strong>🚁 AgroDrone AI</strong><span class="small">Registro de fotos e observações da cana.</span></div><div class="module-card"><strong>📒 Caderno de campo</strong><span class="small">Caderno de campo para vistoria e acompanhamento.</span></div></div><div class="status">Confira sempre as unidades. Dose em mL/ha gera resultado em mL; dose em L/ha gera resultado em litros.</div></section>
+
+<section class="panel tab hidden" id="mix"><h2>🧪 Agromix — calculadora de produtos</h2><p class="muted">Informe a área, o volume de aplicação e a dose de cada produto conforme a bula. Todos os campos numéricos começam em 0.</p>
+<div class="row"><div class="field"><label for="mixArea">Área a aplicar (ha)</label><input id="mixArea" type="number" min="0" step="any" value="0" inputmode="decimal"></div><div class="field"><label for="mixTank">Capacidade útil do tanque (L)</label><input id="mixTank" type="number" min="0" step="any" value="0" inputmode="decimal"></div></div>
+<div class="field"><label for="mixRate">Volume de calda (L/ha)</label><input id="mixRate" type="number" min="0" step="any" value="0" inputmode="decimal"></div>
+<h3>Produtos da mistura</h3><p class="small muted">Adicione quantos produtos precisar. As receitas salvas ficam neste navegador e neste aparelho. Use a unidade correspondente à dose indicada na bula.</p>
+<div class="product-entry mix-product" data-index="1"><h3>Produto 1</h3><div class="field"><label for="mixName1">Nome do produto</label><input id="mixName1" placeholder="Ex.: Produto A"></div><div class="row"><div class="field"><label for="mixDose1">Dose por hectare</label><input id="mixDose1" type="number" min="0" step="any" value="0" inputmode="decimal"></div><div class="field"><label for="mixUnit1">Unidade da dose</label><select id="mixUnit1"><option value="ml">mL/ha</option><option value="l">L/ha</option><option value="g">g/ha</option><option value="kg">kg/ha</option></select></div></div></div>
+<div class="product-entry mix-product" data-index="2"><h3>Produto 2</h3><div class="field"><label for="mixName2">Nome do produto</label><input id="mixName2" placeholder="Ex.: Produto B"></div><div class="row"><div class="field"><label for="mixDose2">Dose por hectare</label><input id="mixDose2" type="number" min="0" step="any" value="0" inputmode="decimal"></div><div class="field"><label for="mixUnit2">Unidade da dose</label><select id="mixUnit2"><option value="ml">mL/ha</option><option value="l">L/ha</option><option value="g">g/ha</option><option value="kg">kg/ha</option></select></div></div></div>
+<div class="product-entry mix-product" data-index="3"><h3>Produto 3</h3><div class="field"><label for="mixName3">Nome do produto</label><input id="mixName3" placeholder="Ex.: Produto C"></div><div class="row"><div class="field"><label for="mixDose3">Dose por hectare</label><input id="mixDose3" type="number" min="0" step="any" value="0" inputmode="decimal"></div><div class="field"><label for="mixUnit3">Unidade da dose</label><select id="mixUnit3"><option value="ml">mL/ha</option><option value="l">L/ha</option><option value="g">g/ha</option><option value="kg">kg/ha</option></select></div></div></div>
+<div id="mixProducts"></div><div class="actions"><button class="secondary" id="mixAddProduct" type="button">＋ Adicionar produto</button></div>
+<div class="product-entry"><h3>Receitas salvas</h3><div class="field"><label for="mixRecipeName">Nome da receita</label><input id="mixRecipeName" placeholder="Ex.: Cana — aplicação do talhão 12"></div><div class="row"><div class="field"><label for="mixSavedRecipes">Escolher receita salva</label><select id="mixSavedRecipes"><option value="">Nenhuma receita salva</option></select></div><div class="field"><label>&nbsp;</label><button class="secondary" id="mixLoadRecipe" type="button">Carregar receita</button></div></div><div class="actions"><button id="mixSaveRecipe" type="button">Salvar receita</button><button class="secondary" id="mixDeleteRecipe" type="button">Excluir receita selecionada</button></div><p class="small muted">As receitas são guardadas localmente neste navegador. Limpar os dados do navegador ou trocar de aparelho pode apagá-las.</p></div>
+<div class="actions"><button id="mixCalc">Calcular mistura</button><button class="secondary" id="mixReset">Zerar campos</button><button class="secondary" id="mixCopy">Copiar resultado</button></div>
+<div class="grid"><div class="metric"><div class="label">Calda total necessária</div><div id="mixSpray" class="value">0 L</div></div><div class="metric"><div class="label">Área por tanque cheio</div><div id="mixCovered" class="value">0 ha</div></div><div class="metric"><div class="label">Quantidade de tanques</div><div id="mixTankCount" class="value">0</div></div><div class="metric"><div class="label">Tanque final</div><div id="mixLastTank" class="value">0 L</div></div></div><div id="mixResults" class="status">Preencha os valores e toque em “Calcular mistura”.</div><div id="mixStatus" class="status">Os cálculos só serão exibidos quando os dados necessários forem maiores que zero.</div><p class="small">O cálculo não confirma compatibilidade entre produtos nem define a dose correta. Siga a bula, o registro para a cultura e o método de aplicação, a ordem de mistura indicada e a orientação do responsável técnico. Não use o resultado como autorização automática para aplicar.</p></section>
+<section class="panel tab hidden" id="vazao"><h2>💧 Vazão — cálculo de vazão</h2><p class="muted">Estimativa matemática para ajudar na calibração.</p><div class="row"><div class="field"><label for="flowRate">Taxa (L/ha)</label><input id="flowRate" type="number" min="0" step="any" value="10"></div><div class="field"><label for="flowWidth">Largura efetiva (m)</label><input id="flowWidth" type="number" min="0" step="any" value="8"></div></div><div class="field"><label for="flowSpeed">Velocidade (km/h)</label><input id="flowSpeed" type="number" min="0" step="any" value="20"></div><button id="flowCalc">Calcular vazão</button><div class="grid"><div class="metric"><div class="label">Vazão total estimada</div><div id="flowOut" class="value">—</div></div><div class="metric"><div class="label">Área teórica por hora</div><div id="flowArea" class="value">—</div></div></div><div id="flowStatus" class="status">Valide a vazão real com a calibração do equipamento.</div><p class="small">Fórmula: L/min = (L/ha × km/h × largura em m) ÷ 600. A largura deve ser a faixa efetiva real.</p></section>
+<section class="panel tab hidden" id="calda"><h2>🛢️ Calda — volume de calda</h2><div class="row"><div class="field"><label for="caldaArea">Área (ha)</label><input id="caldaArea" type="number" min="0" step="any" value="12"></div><div class="field"><label for="caldaRate">Taxa (L/ha)</label><input id="caldaRate" type="number" min="0" step="any" value="10"></div></div><div class="field"><label for="caldaTank">Capacidade útil do tanque (L)</label><input id="caldaTank" type="number" min="0" step="any" value="40"></div><button id="caldaCalc">Calcular calda</button><div class="grid"><div class="metric"><div class="label">Calda total</div><div id="caldaTotal" class="value">—</div></div><div class="metric"><div class="label">Tanques equivalentes</div><div id="caldaTanks" class="value">—</div></div><div class="metric"><div class="label">Área por tanque cheio</div><div id="caldaCovered" class="value">—</div></div><div class="metric"><div class="label">Tanques + restante</div><div id="caldaBreakdown" class="value">—</div></div></div><div class="status">Considere a capacidade útil real e siga a ordem de mistura indicada na bula.</div></section>
+<section class="panel tab hidden" id="drone"><h2>🚁 AgroDrone AI — registro de imagens</h2><p class="muted">Registre fotos aéreas ou próximas da cana-de-açúcar. Esta versão não faz diagnóstico automático da imagem.</p><div class="field"><label for="photoType">Tipo de imagem</label><select id="photoType"><option>Foto aérea</option><option>Foto próxima</option><option>Mosaico de drone</option></select></div><div class="field"><label for="fieldName">Talhão / área</label><input id="fieldName" placeholder="Ex.: Talhão 12"></div><div class="field"><label for="photoNotes">Observações</label><textarea id="photoNotes" rows="3" placeholder="Ex.: falhas no estande, manchas, plantas amareladas..."></textarea></div><div class="field"><label for="fieldPhoto">Selecionar foto</label><input id="fieldPhoto" type="file" accept="image/*"></div><div id="photoPreview" class="hidden"><img id="previewImg" alt="Prévia da foto" style="width:100%;max-height:320px;object-fit:contain;border-radius:12px"><p class="small" id="photoMeta"></p></div><button id="saveObservation">Montar registro</button><button id="analyzeDrone" type="button">Analisar foto com IA</button><div id="aiAnalysisOutput" class="status" aria-live="polite">Selecione uma foto para analisar.</div><div id="droneOutput" class="status">Nenhum registro criado.</div></section>
+<section class="panel tab hidden" id="moxia"><h2>📒 Caderno de campo</h2><p class="muted">Registre vistorias e observações. Os registros ficam nesta sessão; copie para guardar.</p><div class="field"><label for="obsField">Talhão / local</label><input id="obsField" placeholder="Nome do talhão"></div><div class="field"><label for="obsCrop">Cultura</label><input id="obsCrop" value="Cana-de-açúcar"></div><div class="field"><label for="obsType">Categoria</label><select id="obsType"><option>Vistoria geral</option><option>Pragas ou doenças suspeitas</option><option>Falhas no estande</option><option>Clima e solo</option><option>Aplicação realizada</option><option>Manutenção de equipamento</option></select></div><div class="field"><label for="obsText">Observações</label><textarea id="obsText" rows="4" placeholder="Descreva o que foi observado..."></textarea></div><div class="actions"><button id="saveObs">Criar registro</button><button id="copyObs" class="secondary">Copiar registros</button></div><div id="obsOutput" class="status">Nenhum registro nesta sessão.</div><div id="obsList"></div></section>
+
+<section class="panel tab hidden" id="clima"><h2>🌦️ Clima</h2><h2>1. Localizar este dispositivo</h2><p class="muted">Toque para pedir autorização ao navegador. O aparelho fornece latitude, longitude e precisão estimada. A localização não é solicitada sem sua ação.</p><div class="actions"><button id="locate">📍 Usar minha localização</button><button id="refresh" class="secondary" disabled>↻ Atualizar previsão</button></div><div id="gpsStatus" class="status" role="status" aria-live="polite">Aguardando sua autorização para obter a localização.</div><div class="grid"><div class="metric"><div class="label">Latitude</div><div id="lat" class="value coords">—</div><div class="detail">Graus decimais</div></div><div class="metric"><div class="label">Longitude</div><div id="lon" class="value coords">—</div><div class="detail">Graus decimais</div></div><div class="metric"><div class="label">Precisão do GPS</div><div id="accuracy" class="value">—</div><div class="detail">Raio estimado em metros</div></div><div class="metric"><div class="label">Última leitura</div><div id="gpsTime" class="value" style="font-size:1rem">—</div><div class="detail">Hora do dispositivo</div></div></div></section>
+<section class="panel"><h2>2. Previsão para as coordenadas</h2><p class="muted">A previsão é consultada pela internet usando as coordenadas reais capturadas acima. Ela representa uma estimativa regional, não uma medição direta do talhão.</p><div id="weatherStatus" class="status" role="status" aria-live="polite">Aguardando localização para consultar a previsão.</div><div class="grid"><div class="metric"><div class="label">Temperatura do ar</div><div id="temperature" class="value">—</div><div class="detail">Previsão atual</div></div><div class="metric"><div class="label">Umidade relativa</div><div id="humidity" class="value">—</div><div class="detail">Previsão atual</div></div><div class="metric"><div class="label">Vento</div><div id="wind" class="value">—</div><div class="detail">Velocidade média</div></div><div class="metric"><div class="label">Rajadas</div><div id="gusts" class="value">—</div><div class="detail">Velocidade prevista</div></div><div class="metric"><div class="label">Chance de chuva</div><div id="rain" class="value">—</div><div class="detail">Próxima hora disponível</div></div><div class="metric"><div class="label">Atualização da previsão</div><div id="weatherTime" class="value" style="font-size:1rem">—</div><div class="detail">Horário retornado pela API</div></div></div><div id="advice"></div></section>
+<section class="panel"><h2>Como interpretar</h2><p class="muted">Os dados meteorológicos apoiam a decisão, mas não liberam automaticamente uma aplicação. Confira a direção do vento, risco de inversão térmica, condições no local, bula do produto, exigências legais e orientação do responsável técnico. O Delta T não será inventado: para calculá-lo, são necessárias medições adequadas de temperatura de bulbo seco e úmido ou dados equivalentes confiáveis.</p></section>
+<p class="foot">Requisitos: navegador com suporte à Geolocation API, permissão de localização e contexto seguro (HTTPS; localhost para desenvolvimento). A previsão depende de internet e da disponibilidade da API Open-Meteo. Esta página não guarda sua localização em servidor nem usa coordenadas de exemplo.</p>
+</main></div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let position = null;
+  const setStatus = (id, message, error=false) => { const el=$(id); el.textContent=message; el.className='status'+(error?' error':''); };
+  const fmt = (value, digits=2) => Number.isFinite(value) ? value.toFixed(digits) : '—';
+  const clearWeather = () => { ['temperature','humidity','wind','gusts','rain','weatherTime'].forEach(id=>$(id).textContent='—'); $('advice').replaceChildren(); };
+  function gpsError(err) {
+    const messages = {
+      1:'Permissão de localização negada. Autorize a localização nas configurações do navegador e tente novamente.',
+      2:'Não foi possível determinar a localização. Confira o GPS/sinal do aparelho e tente em local aberto.',
+      3:'A localização demorou demais. Tente novamente em alguns instantes.'
+    };
+    setStatus('gpsStatus', messages[err.code] || 'Falha desconhecida ao obter a localização.', true);
+  }
+  function getLocation() {
+    if (!('geolocation' in navigator)) {
+      setStatus('gpsStatus','Este navegador não oferece a Geolocation API.',true); return;
+    }
+    if (!window.isSecureContext) {
+      setStatus('gpsStatus','Por segurança, o GPS exige HTTPS ou localhost. Abra esta página num site seguro para continuar.',true); return;
+    }
+    $('locate').disabled=true;
+    setStatus('gpsStatus','Solicitando localização ao dispositivo… mantenha o GPS ativado.');
+    navigator.geolocation.getCurrentPosition(async pos => {
+      position={latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:pos.coords.accuracy};
+      $('lat').textContent=fmt(position.latitude,6);
+      $('lon').textContent=fmt(position.longitude,6);
+      $('accuracy').textContent=Number.isFinite(position.accuracy)?'± '+Math.round(position.accuracy)+' m':'Não informada';
+      $('gpsTime').textContent=new Date(pos.timestamp).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      $('refresh').disabled=false;
+      const accuracyText=position.accuracy<=30?'boa':position.accuracy<=100?'moderada':'baixa';
+      setStatus('gpsStatus',`Localização obtida. Precisão estimada ${accuracyText} (± ${Math.round(position.accuracy)} m).`);
+      $('locate').disabled=false;
+      await getWeather();
+    }, err=>{gpsError(err);$('locate').disabled=false;}, {enableHighAccuracy:true,timeout:20000,maximumAge:0});
+  }
+  async function getWeather() {
+    if (!position) { setStatus('weatherStatus','Obtenha a localização real antes de consultar a previsão.',true); return; }
+    $('refresh').disabled=true; clearWeather();
+    setStatus('weatherStatus','Consultando previsão meteorológica para as coordenadas capturadas…');
+    const url=new URL('https://api.open-meteo.com/v1/forecast');
+    url.search=new URLSearchParams({latitude:String(position.latitude),longitude:String(position.longitude),current:'temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m',hourly:'precipitation_probability',forecast_days:'1',timezone:'auto'}).toString();
+    try {
+      const response=await fetch(url.toString(),{headers:{'Accept':'application/json'}});
+      if (!response.ok) throw new Error(`Serviço meteorológico respondeu HTTP ${response.status}.`);
+      const data=await response.json();
+      if (!data.current) throw new Error('A API não retornou as condições atuais esperadas.');
+      const cur=data.current, hourly=data.hourly;
+      $('temperature').textContent=Number.isFinite(cur.temperature_2m)?`${fmt(cur.temperature_2m,1)} °C`:'—';
+      $('humidity').textContent=Number.isFinite(cur.relative_humidity_2m)?`${Math.round(cur.relative_humidity_2m)}%`:'—';
+      $('wind').textContent=Number.isFinite(cur.wind_speed_10m)?`${fmt(cur.wind_speed_10m,1)} km/h`:'—';
+      $('gusts').textContent=Number.isFinite(cur.wind_gusts_10m)?`${fmt(cur.wind_gusts_10m,1)} km/h`:'—';
+      let rain='—';
+      if(hourly && Array.isArray(hourly.time) && Array.isArray(hourly.precipitation_probability)) {
+        const now=new Date(); let idx=hourly.time.findIndex(s=>new Date(s).getTime()>=now.getTime()); if(idx<0) idx=0;
+        const val=hourly.precipitation_probability[idx]; if(Number.isFinite(val)) rain=`${Math.round(val)}%`;
+      }
+      $('rain').textContent=rain;
+      $('weatherTime').textContent=cur.time?new Date(cur.time).toLocaleString('pt-BR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}):'Não informada';
+      setStatus('weatherStatus',`Previsão recebida da Open-Meteo. Fuso horário: ${data.timezone || 'não informado'}. A previsão pode diferir das condições medidas no talhão.`);
+      const advisories=[];
+      if(cur.wind_speed_10m>15) advisories.push(['danger','Vento previsto forte: risco de deriva elevado. Reavalie as condições locais e os limites aplicáveis.']);
+      else if(cur.wind_speed_10m>10) advisories.push(['','Vento previsto requer atenção. Confira direção, rajadas e os limites da bula.']);
+      if(cur.temperature_2m>30) advisories.push(['','Temperatura prevista elevada. Avalie também a umidade e a recomendação do produto.']);
+      if(cur.relative_humidity_2m<30) advisories.push(['danger','Umidade prevista muito baixa: potencial elevado de evaporação.']);
+      const advice=$('advice');
+      if(advisories.length) advisories.forEach(([cls,msg])=>{const div=document.createElement('div');div.className='alert '+cls;div.textContent='⚠ '+msg;advice.appendChild(div);});
+      else {const div=document.createElement('div');div.className='alert good';div.textContent='Nenhum alerta simples foi acionado pelos limites indicativos. Isso não garante condições adequadas para aplicação.';advice.appendChild(div);}
+    } catch(err) {
+      setStatus('weatherStatus',`Não foi possível consultar a previsão: ${err.message || 'erro de conexão'}. Verifique a internet e tente atualizar. A localização foi obtida, mas não há dados meteorológicos atuais nesta tela.`,true);
+    } finally { $('refresh').disabled=false; }
+  }
+
+  // Navegação robusta entre módulos: o botão Caderno de campo abre #moxia.
+  function openTab(tabId, clickedButton=null) {
+    const target = document.getElementById(tabId);
+    if (!target || !target.classList.contains('tab')) {
+      console.error('Módulo não encontrado:', tabId);
+      return;
+    }
+    document.querySelectorAll('.tab').forEach(section => section.classList.add('hidden'));
+    target.classList.remove('hidden');
+    document.querySelectorAll('[data-tab]').forEach(button => {
+      button.classList.toggle('active', button === clickedButton);
+    });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('[data-tab]').forEach(button => {
+    button.addEventListener('click', () => openTab(button.dataset.tab, button));
+  });
+  // Garante que o caderno tenha o identificador esperado pelo botão.
+  if (!document.querySelector('[data-tab="moxia"]') || !document.getElementById('moxia')) {
+    console.error('Confira o botão e a seção Caderno de campo: ambos devem usar moxia.');
+  }
+  // Registros do caderno permanecem disponíveis durante a sessão atual.
+
+  const n=id=>Number.parseFloat($(id).value), f=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('pt-BR',{maximumFractionDigits:d}):'—';
+  let nextMixProduct = 4;
+  function addMixProduct(data={}){
+    const i=nextMixProduct++;
+    const entry=document.createElement('div'); entry.className='product-entry mix-product'; entry.dataset.index=String(i);
+    entry.innerHTML=`<div class="actions" style="justify-content:space-between;align-items:center;margin-top:0"><h3>Produto ${i}</h3><button class="secondary mix-remove" type="button" aria-label="Remover produto ${i}">Remover</button></div><div class="field"><label for="mixName${i}">Nome do produto</label><input id="mixName${i}" placeholder="Ex.: Produto ${i}"></div><div class="row"><div class="field"><label for="mixDose${i}">Dose por hectare</label><input id="mixDose${i}" type="number" min="0" step="any" value="0" inputmode="decimal"></div><div class="field"><label for="mixUnit${i}">Unidade da dose</label><select id="mixUnit${i}"><option value="ml">mL/ha</option><option value="l">L/ha</option><option value="g">g/ha</option><option value="kg">kg/ha</option></select></div></div>`;
+    $('mixProducts').appendChild(entry);
+    entry.querySelector('.mix-remove').addEventListener('click',()=>{entry.remove();renumberMixProducts();});
+    if(data.name!==undefined) $('mixName'+i).value=data.name;
+    if(data.dose!==undefined) $('mixDose'+i).value=data.dose;
+    if(data.unit) $('mixUnit'+i).value=data.unit;
+    return entry;
+  }
+  function renumberMixProducts(){document.querySelectorAll('.mix-product').forEach((el,idx)=>{const h=el.querySelector('h3');if(h)h.textContent='Produto '+(idx+1);});}
+  $('mixAddProduct').addEventListener('click',()=>addMixProduct());
+  function getMixProducts(){return [...document.querySelectorAll('.mix-product')].map(el=>{const i=el.dataset.index;return {name:$('mixName'+i).value.trim(),dose:n('mixDose'+i),unit:$('mixUnit'+i).value};});}
+  function mix(){
+    const area=n('mixArea'),tank=n('mixTank'),rate=n('mixRate');
+    if(![area,tank,rate].every(v=>Number.isFinite(v)&&v>0)){$('mixStatus').textContent='Informe área, capacidade útil do tanque e volume de calda com valores maiores que zero.';return;}
+    const totalSpray=area*rate, areaPerTank=tank/rate, tankCount=Math.ceil(totalSpray/tank), lastTank=totalSpray%tank || (totalSpray>0?tank:0);
+    $('mixSpray').textContent=f(totalSpray)+' L';$('mixCovered').textContent=f(areaPerTank)+' ha';$('mixTankCount').textContent=String(tankCount);$('mixLastTank').textContent=f(lastTank)+' L';
+    const units={ml:{label:'mL',factor:1},l:{label:'L',factor:1},g:{label:'g',factor:1},kg:{label:'kg',factor:1}};
+    const lines=[];let used=0;
+    for(const [idx,p] of getMixProducts().entries()){
+      if(!Number.isFinite(p.dose)||p.dose<0){$('mixStatus').textContent='Confira as doses: elas não podem ser negativas.';return;}
+      if(p.dose===0) continue;
+      used++; const name=p.name||('Produto '+(idx+1)), u=units[p.unit].label;
+      const total=p.dose*area, perTank=p.dose*Math.min(areaPerTank,area);
+      lines.push(`${name}: ${f(p.dose)} ${u}/ha · total para a área: ${f(total)} ${u} · por tanque cheio: ${f(perTank)} ${u}`);
+    }
+    $('mixResults').textContent=lines.length?lines.join('\n'):'Nenhuma dose preenchida: informe a dose de pelo menos um produto.';
+    $('mixResults').style.whiteSpace='pre-line';
+    $('mixStatus').textContent=`Cálculo concluído para ${f(area)} ha. ${used} produto(s) com dose preenchida. Confira todos os valores e a bula antes de preparar a calda.`;
+  }
+  $('mixCalc').addEventListener('click',mix);
+  $('mixReset').addEventListener('click',()=>{['mixArea','mixTank','mixRate'].forEach(id=>$(id).value=0);document.querySelectorAll('.mix-product').forEach(el=>{const i=el.dataset.index;$('mixDose'+i).value=0;$('mixName'+i).value='';$('mixUnit'+i).value='ml';});$('mixSpray').textContent='0 L';$('mixTankCount').textContent='0';$('mixLastTank').textContent='0 L';$('mixCovered').textContent='0 ha';$('mixResults').textContent='Preencha os valores e toque em “Calcular mistura”.';$('mixStatus').textContent='Campos zerados.';});
+  const MIX_RECIPES_KEY='agrocampo_pro_mix_recipes_v1';
+  function readMixRecipes(){try{return JSON.parse(localStorage.getItem(MIX_RECIPES_KEY)||'{}')}catch(e){return {}}}
+  function refreshMixRecipes(selectName=''){const recipes=readMixRecipes(),sel=$('mixSavedRecipes');sel.innerHTML='';const names=Object.keys(recipes).sort((a,b)=>a.localeCompare(b,'pt-BR'));if(!names.length){sel.add(new Option('Nenhuma receita salva',''));return;}sel.add(new Option('Selecione uma receita',''));names.forEach(name=>sel.add(new Option(name,name)));if(selectName&&recipes[selectName])sel.value=selectName;}
+  function currentMixRecipe(){return {area:n('mixArea')||0,tank:n('mixTank')||0,rate:n('mixRate')||0,products:getMixProducts()};}
+  $('mixSaveRecipe').addEventListener('click',()=>{const name=$('mixRecipeName').value.trim();if(!name){$('mixStatus').textContent='Digite um nome para salvar a receita.';return;}const recipes=readMixRecipes();recipes[name]=currentMixRecipe();try{localStorage.setItem(MIX_RECIPES_KEY,JSON.stringify(recipes));refreshMixRecipes(name);$('mixStatus').textContent='Receita “'+name+'” salva neste navegador.';}catch(e){$('mixStatus').textContent='Não foi possível salvar. Verifique o espaço disponível no navegador.';}});
+  $('mixLoadRecipe').addEventListener('click',()=>{const name=$('mixSavedRecipes').value,recipe=readMixRecipes()[name];if(!recipe){$('mixStatus').textContent='Selecione uma receita salva.';return;}$('mixArea').value=recipe.area??0;$('mixTank').value=recipe.tank??0;$('mixRate').value=recipe.rate??0;document.querySelectorAll('.mix-product').forEach(el=>el.remove());$('mixProducts').innerHTML='';nextMixProduct=1;(recipe.products||[]).forEach(prod=>addMixProduct(prod));if(!recipe.products||!recipe.products.length){addMixProduct();}renumberMixProducts();$('mixRecipeName').value=name;$('mixStatus').textContent='Receita carregada. Confira os dados antes de calcular.';});
+  $('mixDeleteRecipe').addEventListener('click',()=>{const name=$('mixSavedRecipes').value;if(!name){$('mixStatus').textContent='Selecione uma receita para excluir.';return;}const recipes=readMixRecipes();delete recipes[name];localStorage.setItem(MIX_RECIPES_KEY,JSON.stringify(recipes));refreshMixRecipes();$('mixStatus').textContent='Receita excluída.';});
+  refreshMixRecipes();
+  $('mixCopy').addEventListener('click',async()=>{const text=$('mixResults').textContent+'\n'+$('mixStatus').textContent;try{await navigator.clipboard.writeText(text);$('mixStatus').textContent='Resultado copiado.';}catch(e){$('mixStatus').textContent='Não foi possível copiar automaticamente. Selecione o texto do resultado e copie manualmente.';}});
+  function flow(){let r=n('flowRate'),w=n('flowWidth'),v=n('flowSpeed');if(![r,w,v].every(x=>Number.isFinite(x)&&x>0)){$('flowStatus').textContent='Preencha os campos com valores maiores que zero.';return;}$('flowOut').textContent=f(r*w*v/600)+' L/min';$('flowArea').textContent=f(w*v/10)+' ha/h';$('flowStatus').textContent='Estimativa calculada. Valide com a calibração real do equipamento.';}
+  $('flowCalc').addEventListener('click',flow);
+  function calda(){let a=n('caldaArea'),r=n('caldaRate'),t=n('caldaTank');if(![a,r,t].every(x=>Number.isFinite(x)&&x>0))return;let total=a*r,full=Math.floor(total/t),rem=total-full*t;$('caldaTotal').textContent=f(total)+' L';$('caldaTanks').textContent=f(total/t);$('caldaCovered').textContent=f(t/r)+' ha';$('caldaBreakdown').textContent=full+' tanque(s) cheio(s)'+(rem>.001?' + '+f(rem)+' L':'');}
+  $('caldaCalc').addEventListener('click',calda);
+  let photoData=null;$('fieldPhoto').addEventListener('change',()=>{let file=$('fieldPhoto').files&&$('fieldPhoto').files[0];if(!file)return;if(!file.type.startsWith('image/'))return;let reader=new FileReader();reader.onload=()=>{photoData=reader.result;$('previewImg').src=photoData;$('photoPreview').classList.remove('hidden');$('photoMeta').textContent=file.name+' · '+f(file.size/1024)+' KB';};reader.readAsDataURL(file);});
+  $('saveObservation').addEventListener('click',()=>{$('droneOutput').textContent='REGISTRO AGRODRONE AI\nData: '+new Date().toLocaleString('pt-BR')+'\nTalhão: '+($('fieldName').value.trim()||'Não informado')+'\nTipo: '+$('photoType').value+'\nObservações: '+($('photoNotes').value.trim()||'Nenhuma')+'\nFoto: '+($('fieldPhoto').files[0]?.name||'Não selecionada')+'\n\nRegistro manual; não é diagnóstico automático.';});
+  let obs=[];function renderObs(){$('obsList').replaceChildren();obs.forEach(item=>{let d=document.createElement('div');d.className='metric';d.style.marginTop='10px';let p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.textContent=item;d.appendChild(p);$('obsList').appendChild(d);});}
+  $('saveObs').addEventListener('click',()=>{obs.push('['+new Date().toLocaleString('pt-BR')+'] '+($('obsField').value.trim()||'Talhão não informado')+' | '+$('obsCrop').value+' | '+$('obsType').value+'\n'+($('obsText').value.trim()||'Sem observações.'));renderObs();$('obsOutput').textContent='Registro adicionado nesta sessão.';});
+  $('copyObs').addEventListener('click',()=>{let txt=obs.join('\n\n')||'Nenhum registro criado.';if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(()=>$('obsOutput').textContent='Registros copiados.').catch(()=>$('obsOutput').textContent=txt);else $('obsOutput').textContent=txt+' (selecione e copie manualmente)';});
+  mix();flow();calda();
+
+  $('locate').addEventListener('click',getLocation);
+  $('refresh').addEventListener('click',getWeather);
+})();
+</script>
+</body>
+</html>
