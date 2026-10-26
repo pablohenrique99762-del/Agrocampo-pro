@@ -17,6 +17,57 @@ input,select,textarea{width:100%;font:inherit;color:var(--site-on-background);ba
 .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-card{padding:14px;border-radius:14px;background:light-dark(#f2f6f2,#222f26);border:1px solid light-dark(#e2eae3,#34473a)}.module-card strong{display:block;margin-bottom:5px}.hidden{display:none!important}.small{font-size:.82rem;line-height:1.5;color:light-dark(#5d6c61,#b0c4b5)}
 @media(max-width:360px){.row,.module-cards{grid-template-columns:1fr}}
 
+
+.relatorio-ia {
+  margin-top: 16px;
+    padding: 18px;
+      border: 1px solid #3b5748;
+        border-radius: 14px;
+          background: #f4f8f5;
+            color: #24352b;
+              line-height: 1.75;
+                font-size: 15px;
+                  overflow-wrap: anywhere;
+                  }
+
+                  .relatorio-ia h3 {
+                    margin: 22px 0 10px;
+                      padding: 10px 12px;
+                        border-left: 4px solid #247447;
+                          border-radius: 5px;
+                            background: #e0efe5;
+                              color: #174b35;
+                                font-size: 17px;
+                                  line-height: 1.4;
+                                  }
+
+                                  .relatorio-ia h3:first-child {
+                                    margin-top: 0;
+                                    }
+
+                                    .relatorio-ia strong {
+                                      color: #174b35;
+                                        font-weight: 700;
+                                        }
+
+                                        .relatorio-ia hr {
+                                          border: 0;
+                                            border-top: 1px solid #d0ded4;
+                                              margin: 18px 0;
+                                              }
+
+                                              @media (max-width: 480px) {
+                                                .relatorio-ia {
+                                                    padding: 14px;
+                                                        font-size: 14px;
+                                                            line-height: 1.7;
+                                                              }
+
+                                                                .relatorio-ia h3 {
+                                                                    font-size: 16px;
+                                                                      }
+                                                                      }
+                                                                      
 </style>
 </head>
 <body>
@@ -222,15 +273,43 @@ input,select,textarea{width:100%;font:inherit;color:var(--site-on-background);ba
                                                                                             const relatorio = document.createElement('div');
                                                                                             relatorio.className = 'relatorio-ia';
 
+                                                                                            
                                                                                             const texto = data.analise || 'A IA não retornou uma análise.';
-                                                                                            relatorio.innerHTML = texto
+
+                                                                                            const textoSeguro = texto
                                                                                               .replace(/&/g, '&amp;')
                                                                                                 .replace(/</g, '&lt;')
-                                                                                                  .replace(/>/g, '&gt;')
-                                                                                                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                                                                                                      .replace(/^###\s?(.*)$/gm, '<h3>$1</h3>')
-                                                                                                        .replace(/^---\s*$/gm, '<hr>')
-                                                                                                          .replace(/\n/g, '<br>');
+                                                                                                  .replace(/>/g, '&gt;');
+
+                                                                                                  const resumo = texto.match(
+                                                                                                    /(?:^|\n)#{1,3}\s*(?:5[.)]\s*)?Conclusão\s*\n([\s\S]*?)(?=\n#{1,3}\s|$)/i
+                                                                                                    );
+
+                                                                                                    const resumoBox = document.createElement('div');
+                                                                                                    resumoBox.className = 'resumo-rapido';
+
+                                                                                                    const tituloResumo = document.createElement('h3');
+                                                                                                    tituloResumo.textContent = 'Resumo rápido';
+
+                                                                                                    const textoResumo = document.createElement('p');
+                                                                                                    textoResumo.textContent = resumo
+                                                                                                      ? resumo[1].replace(/\*\*/g, '').trim()
+                                                                                                        : 'Consulte as observações visuais e as hipóteses abaixo para ver os resultados da análise.';
+
+                                                                                                        resumoBox.appendChild(tituloResumo);
+                                                                                                        resumoBox.appendChild(textoResumo);
+
+                                                                                                        relatorio.appendChild(resumoBox);
+
+                                                                                                        relatorio.insertAdjacentHTML(
+                                                                                                            'beforeend',
+                                                                                                              textoSeguro
+                                                                                                                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                                                                                                      .replace(/^###\s?(.*)$/gm, '<h3>$1</h3>')
+                                                                                                                          .replace(/^\s*---\s*$/gm, '<hr>')
+                                                                                                                              .replace(/\n/g, '<br>')
+                                                                                                                              );
+                                                                                                        
 
                                                                                                           out.appendChild(relatorio);
                                                                                                   } catch (e) {
